@@ -21,21 +21,21 @@ class LinkedList {
         void borra();
 };
 
-template<typename T>
+template <typename T>
 LinkedList<T>::LinkedList() {
     head = NULL;
     iC = 0;
 }
-template typename<T>
-void LinkedList<T>~LinkedList() {
+template <typename T>
+LinkedList<T>::~LinkedList() {
     borra();
 }
 
-template typename <T>
+template <typename T>
 T LinkedList<T>::get(int pos) {
     Node<T> *aux = head;
 
-    if (pos < 0 || pos >= iCant)
+    if (pos < 0 || pos >= iC)
         return false;
     if (pos == 0)
         return head->getData();
@@ -47,11 +47,11 @@ T LinkedList<T>::get(int pos) {
     delete aux;
 }
 
-template typename <T>
+template <typename T>
 T LinkedList<T>::set(T data, int pos) {
     Node<T> *aux = head;
 
-    if (pos < 0 || pos >= iCant)
+    if (pos < 0 || pos >= iC)
         return false;
     if (pos == 0)
         head -> setData(data);
@@ -63,26 +63,26 @@ T LinkedList<T>::set(T data, int pos) {
     delete aux;
 }
 
-template<typename T>
+template <typename T>
 bool LinkedList<T>::isEmpty() {
     return (head == NULL);
 }
 
-template<typename T>
+template <typename T>
 void LinkedList<T>::addFirst(T data) {
     head = new Node<T>(data, head);
-    iC++
+    iC++;
 }
-template<typename T>
+template <typename T>
 void LinkedList<T>::addLast(T data) {
     if (isEmpty())
-        addFirst(data)
+        addFirst(data);
     else {
         Node<T> *aux = head;
         while (aux -> getNext() != NULL){
             aux = aux->getNext();
         }
-        aux -> new node<T>(data);
+        aux = new Node<T>(data);
         iC++;
     }
 
@@ -91,7 +91,7 @@ void LinkedList<T>::addLast(T data) {
 template <typename T>
 void LinkedList<T>::deleteFirst() {
     if (!this-> isEmpty()) {
-        node<T> *aux = head;
+        Node<T> *aux = head;
         head = head->getNext();
         delete aux;
         iC--;
@@ -105,7 +105,7 @@ void LinkedList<T>::deleteLast() {
     }
 
     else {
-        node<T> *aux = head;
+        Node<T> *aux = head;
         while(aux -> getNext() -> getNext() != NULL) {
             aux = aux -> getNext();
         }
@@ -115,7 +115,7 @@ void LinkedList<T>::deleteLast() {
     }
 }
 
-template typename<T>
+template <typename T>
 bool LinkedList<T>::add(T data, int pos) {
     if (pos < 0 || pos > iC )
         return false;
@@ -124,27 +124,27 @@ bool LinkedList<T>::add(T data, int pos) {
     if (pos == iC)
         addLast(data);
     else {
-        node<T> *aux = head;
+        Node<T> *aux = head;
         for( int i = 1; i < pos; i++) {
             aux = aux->getNext();
         }
-        aux->setNext(new node<T>(data, aux->getNext()));
+        aux->setNext(new Node<T>(data, aux->getNext()));
         iC++;
     }
     return true;
 }
 
-template typename<T>
+template <typename T>
 bool LinkedList<T>::del(int pos) {
     if (pos < 0 || pos >= iC)
         return false;
-    if (post == 0)
+    if (pos == 0)
         deleteFirst();
     if (pos == iC-1)
         deleteLast();
     else {
-        node<T> *aux = head;
-        node <T> *temp;
+        Node<T> *aux = head;
+        Node <T> *temp;
 
         for (int i = 1; i < pos; ++i) {
             aux = aux->getNext();
@@ -157,7 +157,7 @@ bool LinkedList<T>::del(int pos) {
     return true;
 }
 
-template typename <T>
+template <typename T>
 int LinkedList<T>::deleteAll() {
     borra();
     int iCant = iC;
@@ -165,17 +165,17 @@ int LinkedList<T>::deleteAll() {
     return iCant;
 }
 
-template typename<T>
+template <typename T>
 void LinkedList<T>::borra() {
-    node<T> *aux = head;
-    whlie (head != NULL) {
+    Node<T> *aux = head;
+    while (head != NULL) {
         head = head->getNext();
         delete aux;
         aux = head;
     }
 }
 
-template typename<T>
+template <typename T>
 bool LinkedList<T>::change(int pos1, int pos2) {
     if(pos1 < 0 || pos1 >= iC || pos2 < 0 || pos2 >= iC)
         return false;
@@ -183,12 +183,12 @@ bool LinkedList<T>::change(int pos1, int pos2) {
         return true;
      int posMayor = (pos1 > pos2) ? pos1 : pos2;
      int posMenor = (pos1 < pos2) ? pos1 : pos2;
-     node <T> * aux1 = head, aux2;
+     Node <T> * aux1 = head, aux2;
      for (int i = 1; i <= posMenor; i++)
         aux1 = aux -> getNext();
 
     aux2 = aux1;
-    for (int i=1 i <= (posMayor - posMenor); i++)
+    for (int i=1; i <= (posMayor - posMenor); i++)
         aux2 = aux2 -> getNext();
     T temp = aux1 -> getData();
     aux->setData(aux->getData());
@@ -196,12 +196,12 @@ bool LinkedList<T>::change(int pos1, int pos2) {
     return true;
 }
 
-template typename <T>
+template <typename T>
 void LinkedList<T>::print() {
     Node <T> *aux = head;
 
     while(aux != NULL) {
-        cout << aux -> getData() << " "
+        cout << aux -> getData() << " " ;
         aux = aux -> getNext();
     }
 }

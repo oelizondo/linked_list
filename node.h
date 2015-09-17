@@ -1,5 +1,4 @@
 template <class T>
-
 class Node {
     public:
         Node(T data);
@@ -18,13 +17,13 @@ class Node {
 template <typename T>
 Node<T>::Node(T data){
     this-> data = data;
-    this->next = NULL;
+    this->next = 0;
 }
 
 template <typename T>
-Node<T>::Node(T data, Node<T> *next) {
+Node<T>::Node(T data, Node<T> *nnext) {
     this-> data = data;
-    *next = next;
+    this-> next = nnext;
 }
 
 template <typename T>
@@ -43,8 +42,6 @@ void Node<T>::setData(T data){
 }
 
 template  <typename T>
-void Node<T>::setNext(node<T> *next){
+void Node<T>::setNext(Node<T> *next){
     this-> next = next;
 }
-template <typename T>
-void Node<T>::
