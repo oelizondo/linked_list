@@ -21,6 +21,8 @@ class LinkedList {
         void operator+=(T dato);
         bool operator==(const LinkedList<T> &lista);
         void reverse();
+        void shift(int n);
+        void spin(int n);
     private:
         Node<T> *head;
         int iC;
@@ -249,10 +251,11 @@ void LinkedList<T>::operator+=(T data) {
 
 template <typename T>
 bool LinkedList<T>::operator==(const LinkedList<T> &lista) {
-    Node<T> *aux, *aux2= lista -> head, head;
+    Node<T> *aux = lista -> head;
+    Node<T> *aux2 = head;
     if (iC != lista -> iC) { return false; }
     for (int i = 0; i < iC; i++) {
-        if (aux2 -> getData(i) == lista -> getData(i)) {
+        if (aux2 -> get(i) == lista -> get(i)) {
             aux2 -> getNext();
             aux = aux -> getNext();
         }
@@ -265,5 +268,35 @@ bool LinkedList<T>::operator==(const LinkedList<T> &lista) {
 
 template <typename T>
 void LinkedList<T>::reverse() {
+    Node<T> *aux = head;
+    if (head != NULL){
+        last = new Node<T>(head -> getData());
+        for (int i = 0; i < iC; i++){
+            last -> addFirst(aux -> getData());
+            aux = aux -> getNext();
+        }
+        aux -> setNext(NULL);
+    }
+}
 
+template <typename T>
+void LinkedList<T>::shift(int n) {
+    if (n != 0){
+        Node<T> *aux = head;
+        for (int i = 0; i < n; i++) {
+            last = new Node<T>(get(iC-1));
+            addFirst(*last);
+        }
+    }
+}
+
+template <typename T>
+void LinkedList<T>::spin(int n) {
+    int iteraciones = iC / n;
+
+    for(int i = 0; i < iteraciones; i++) {
+        for (int j = 0; j < n; j++) {
+
+        }
+    }
 }
