@@ -2,6 +2,7 @@ template <class T>
 class LinkedList {
     public:
         LinkedList();
+        LinkedList(const LinkedList<T> &lista);
         ~LinkedList();
         T get(int pos);
         T set(T data, int pos);
@@ -15,6 +16,11 @@ class LinkedList {
         int deleteAll();
         bool change(int pos1, int pos2);
         void print();
+        void operator=(const LinkedList<T> &lista);
+        void operator+=(const LinkedList<T> &lista);
+        void operator+=(T dato);
+        bool operator==(const LinkedList<T> &lista);
+        void reverse();
     private:
         Node<T> *head;
         int iC;
@@ -26,6 +32,17 @@ LinkedList<T>::LinkedList() {
     head = NULL;
     iC = 0;
 }
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T> &lista) {
+    iC = lista -> iC;
+
+    Node<T> *aux = lista -> head;
+    for (int i = 0; i < iC; i++){
+        aux -> addLast(aux -> getData());
+        aux = aux -> getNext();
+    }
+}
+
 template <typename T>
 LinkedList<T>::~LinkedList() {
     borra();
@@ -204,4 +221,49 @@ void LinkedList<T>::print() {
         cout << aux -> getData() << " " ;
         aux = aux -> getNext();
     }
+}
+
+template <typename T>
+void LinkedList<T>::operator=(const LinkedList<T> &lista) {
+    iC = lista -> iC;
+    Node<T> *aux = head;
+    for( int i = 0; i < iC; i++){
+        aux -> addLast(aux -> getData());
+        aux = aux -> getNext();
+    }
+}
+
+template <typename T>
+void LinkedList<T>::operator+=(const LinkedList<T> &lista) {
+    Node<T> *aux = lista -> head;
+    for (int i = 0; i < lista -> iC; i++){
+        addLast(aux->getData());
+        aux =  aux -> getNext();
+    }
+}
+
+template <typename T>
+void LinkedList<T>::operator+=(T data) {
+    addLast(data);
+}
+
+template <typename T>
+bool LinkedList<T>::operator==(const LinkedList<T> &lista) {
+    Node<T> *aux, *aux2= lista -> head, head;
+    if (iC != lista -> iC) { return false; }
+    for (int i = 0; i < iC; i++) {
+        if (aux2 -> getData(i) == lista -> getData(i)) {
+            aux2 -> getNext();
+            aux = aux -> getNext();
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename T>
+void LinkedList<T>::reverse() {
+
 }
